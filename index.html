@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome — Bread App</title>
+  <link rel="stylesheet" href="styles.css"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; background:#f6f7fb; text-align:center; }
+    .container { max-width: 600px; margin: 4rem auto; background:#fff; padding:2rem; border-radius:10px; box-shadow:0 8px 30px rgba(0,0,0,.06); }
+    a.btn { display:inline-block; margin:1rem; padding:.5rem 1rem; border-radius:8px; background:#1976d2; color:#fff; text-decoration:none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Welcome to Bread App</h1>
+    <p>Order your favorite bread and pastries easily.</p>
+    <a href="/order.html" class="btn">Order Bread</a>
+    <a href="/admin.html" class="btn">Admin Panel</a>
+  </div>
+
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      try { await fetch('/api/logout', { method:'POST' }); } catch {}
+      location.href = '/login.html';
+    });
+
+  </script>
+</body>
+</html>

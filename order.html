@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bread Order App</title>
+  <!-- Link the web‑app manifest so the app can be installed as a PWA -->
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <style>
+    .container { max-width: 900px; margin: 2rem auto; background:#fff; padding:1rem 1.5rem; border-radius:8px; box-shadow:0 2px 12px rgba(0,0,0,.08);}
+    
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Bread Order App</h1>
+  </header>
+  <main>
+    <div class="inline mrgn-bttm-lg">
+        <a class="btn btn-success" href="/">Home</a>
+        <button class="btn btn-primary" id="logoutBtn">Logout</button>
+      </div>
+    <!-- Form to capture a single bread item and its quantity -->
+    <form id="orderForm">
+      <label for="itemNameSelect" style="margin-top: 20px;">Bread item:</label>
+      <!-- The select box will be populated with available bread items via app.js -->
+      <select id="itemNameSelect" name="itemNameSelect" required></select>
+      <label for="itemQty">Quantity:</label>
+      <input type="number" id="itemQty" name="itemQty" min="1" placeholder="1" required>
+      <button type="submit">Add Order</button>
+    </form>
+    <!-- Manage bread items: expand the details element to add or rename items -->
+    <details id="manageItems">
+      <summary>Manage Bread Items</summary>
+      <div class="manage-items-container">
+        <p>Click on an item to rename it. Use the button below to add a new item.</p>
+        <ul id="itemList"></ul>
+        <button type="button" id="addNewItem" class="btn btn-primary">Add New Item</button>
+      </div>
+    </details>
+    <!-- Section showing the current day's order list -->
+    <section id="orderList">
+      <h2>Today's Orders</h2>
+      <ul id="orderItems"></ul>
+    </section>
+    <!-- Buttons to send the summary via email and reset the list -->
+    <button id="sendSummary">Send Summary</button>
+    <button id="resetOrders">Reset Orders</button>
+  </main>
+  <!-- Load the application script. For multi-user support the app now
+       communicates with a back-end server to store orders and items. -->
+  <script src="app_server.js"></script>
+  <script>
+    document.getElementById('logoutBtn').addEventListener('click', async () => {
+      try { await fetch('/api/logout', { method:'POST' }); } catch {}
+      location.href = '/login.html';
+    });
+
+  </script>
+</body>
+</html>
